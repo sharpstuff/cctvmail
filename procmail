@@ -1,0 +1,30 @@
+#! /bin/sh
+
+MAILFILE=`echo /home/pi/dev/cctvmail/mail$$`
+DT=$(date +"%m_%d_%Y_%H_%M_%S")
+ATTDIR=/home/pi/dev/cctvmail/attachments/$DT
+D=$(date +"%Y_%m_%d")
+DDIR=/home/pi/dev/cctvmail/attachments/$D
+
+# Create results folder
+if [ ! -d "$D" ]; then
+    mkdir $DDIR
+fi
+
+mkdir $ATTDIR
+cd $ATTDIR
+
+while read line
+do
+	echo $line >> $MAILFILE
+done
+
+uudeview -i -p $ATTDIR $MAILFILE
+
+rm $MAILFILE
+
+for i in UNKNOWN.*; do j=`echo $i | sed "s/UNKNOWN/$DT/g"`; mv "$i" "$j.jpg"; done
+
+mv *.jpg $DDIR
+
+rm -r $ATTDIR
