@@ -1,10 +1,17 @@
 #! /bin/sh
 
-MAILFILE=`echo /home/pi/dev/cctvmail/mail$$`
-DT=$(date +"%m_%d_%Y_%H_%M_%S")
-ATTDIR=/home/pi/dev/cctvmail/attachments/$DT
 D=$(date +"%Y_%m_%d")
-DDIR=/home/pi/dev/cctvmail/attachments/$D
+DT=$(date +"%m_%d_%Y_%H_%M_%S")
+
+HOMEDIR=/home/pi/dev/cctvmail
+MAILFILE=`echo $HOMEDIR/mail$$`
+ATTDIR=$HOMEDIR/attachments/$DT
+DDIR=$HOMEDIR/attachments/$D
+
+# Create attachments folder
+if [ ! -d "$HOMEDIR/attachments" ]; then
+    mkdir $HOMEDIR/attachments
+fi
 
 # Create results folder
 if [ ! -d "$D" ]; then
