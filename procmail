@@ -14,7 +14,7 @@ if [ ! -d "$HOMEDIR/attachments" ]; then
 fi
 
 # Create results folder
-if [ ! -d "$D" ]; then
+if [ ! -d "$DDIR" ]; then
     mkdir $DDIR
 fi
 
@@ -32,12 +32,12 @@ rm $MAILFILE
 
 MOTION=`/home/pi/bin/motion UNKNOWN.001 UNKNOWN 002`
 
-if [ $MOTION -eq "true" ]
+if [ $MOTION -eq "true" ] 
 	for i in UNKNOWN.*; do j=`echo $i | sed "s/UNKNOWN/$DT/g"`; mv "$i" "$j.jpg"; done
 else
-	rm UNKNOWN.*
+	rm UNKNOWN.*; done
 fi
 
 mv *.jpg $DDIR
-
+cd ..
 rm -r $ATTDIR
