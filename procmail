@@ -30,7 +30,13 @@ uudeview -i -p $ATTDIR $MAILFILE
 
 rm $MAILFILE
 
-for i in UNKNOWN.*; do j=`echo $i | sed "s/UNKNOWN/$DT/g"`; mv "$i" "$j.jpg"; done
+MOTION=`/home/pi/bin/motion UNKNOWN.001 UNKNOWN 002`
+
+if [ $MOTION -eq "true" ]
+	for i in UNKNOWN.*; do j=`echo $i | sed "s/UNKNOWN/$DT/g"`; mv "$i" "$j.jpg"; done
+else
+	rm UNKNOWN.*
+fi
 
 mv *.jpg $DDIR
 
