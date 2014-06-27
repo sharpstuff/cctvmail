@@ -32,7 +32,7 @@ rm $MAILFILE
 
 MOTION=`/home/pi/bin/motion UNKNOWN.001 UNKNOWN 002`
 
-if [ $MOTION -eq "true" ] then
+if [ $MOTION -eq "true" ]; then
 	for i in UNKNOWN.*; do j=`echo $i | sed "s/UNKNOWN/$DT/g"`; mv "$i" "$j.jpg"; done
 else
 	rm UNKNOWN.*; done
